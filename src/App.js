@@ -12,6 +12,8 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import CreateListing from './components/listings/CreateListing'
 import IndexListings from './components/listings/IndexListings'
+import ShowListing from './components/listings/ShowListing'
+import PostedListings from './components/listings/PostedListings'
 
 class App extends Component {
   constructor (props) {
@@ -99,10 +101,31 @@ class App extends Component {
               />
             )}
           />
+
+          <AuthenticatedRoute
+            exact
+            user={user}
+            path='/posted-listings'
+            render={() => (
+              <PostedListings
+                msgAlert={this.msgAlert}
+                clearUser={this.clearUser}
+                user={user}
+              />
+            )}
+          />
+
           <Route
+            exact
             path='/listings'
             render={() => (
               <IndexListings msgAlert={this.msgAlert} setUser={this.setUser} />
+            )}
+          />
+          <Route
+            path='/listings/:id'
+            render={() => (
+              <ShowListing msgAlert={this.msgAlert} setUser={this.setUser} />
             )}
           />
         </main>

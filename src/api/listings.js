@@ -17,17 +17,6 @@ export const createListing = (data, user) => {
 export const indexListings = (user) => {
   return axios({
     url: apiUrl + '/listings',
-    method: 'get'
-    // headers: {
-    //   Authorization: `Bearer ${user.token}`
-    // }
-  })
-}
-
-// show one list
-export const showList = (id, user) => {
-  return axios({
-    url: apiUrl + '/lists/' + id,
     method: 'get',
     headers: {
       Authorization: `Bearer ${user.token}`
@@ -35,8 +24,20 @@ export const showList = (id, user) => {
   })
 }
 
+// show one list
+export const showListing = (id, user) => {
+  console.log('id is: ', id)
+  return axios({
+    url: apiUrl + '/listings/' + id,
+    method: 'get'
+    // headers: {
+    //   Authorization: `Bearer ${user.token}`
+    // }
+  })
+}
+
 // delete a list
-export const deleteList = (id, user) => {
+export const deleteListing = (id, user) => {
   return axios({
     url: apiUrl + '/lists/' + id,
     method: 'delete',

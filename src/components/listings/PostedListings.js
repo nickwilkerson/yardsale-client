@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
+// import axios from 'axios'
+// import apiUrl from '../../apiConfig'
 // import { indexListings } from '../../api/listings'
 import Card from 'react-bootstrap/Card'
 // import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { indexListings } from '../../api/listings'
 
-class IndexListings extends Component {
+class PostedListings extends Component {
   constructor (props) {
     super(props)
 
@@ -18,8 +19,8 @@ class IndexListings extends Component {
   }
 
   componentDidMount () {
-    axios(apiUrl + '/listings')
-      .then(res => {
+    indexListings(this.props.user)
+      .then((res) => {
         this.setState({ items: res.data.listings })
       })
       .catch(console.error)
@@ -28,11 +29,14 @@ class IndexListings extends Component {
   render () {
     let listedItems
     const { items } = this.state
+    const { user } = this.props
     // const { history } = this.props
+
     if (!items) {
-      listedItems = 'Loading...'
+      listedItems = 'Loading...Loadin...Loadi...Load...Loa...Lo...L'
     } else {
-      listedItems = items.map((item) => (
+      const filteredItems = items.filter(item => user._id === item.owner)
+      listedItems = filteredItems.map((item) => (
         <Card
           key={item._id}
           className='d-inline-flex p-2'
@@ -55,8 +59,13 @@ class IndexListings extends Component {
         </Card>
       ))
     }
-    return <div>{listedItems}</div>
+    return (
+
+      <div>
+        {listedItems}
+      </div>
+    )
   }
 }
 
-export default withRouter(IndexListings)
+export default withRouter(PostedListings)
