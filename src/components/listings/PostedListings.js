@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 // import { indexListings } from '../../api/listings'
@@ -52,7 +52,7 @@ class PostedListings extends Component {
   render () {
     let listedItems
     const { items } = this.state
-    const { user } = this.props
+    const { user, match } = this.props
 
     // variable for items that user owns
     const filteredItems = items.filter((item) => user._id === item.owner)
@@ -77,7 +77,9 @@ class PostedListings extends Component {
             <Card.Text>{item.price}</Card.Text>
             <ListGroup className='list-group-flush'>{item.category}</ListGroup>
           </Card.Body>
-          <Button>Edit</Button>
+          <Link to={{ pathname: `/edit/${match.params.id}`, itemId: item._id }}>
+            <Button>Edit</Button>
+          </Link>
           <Button onClick={() => this.delete(item._id)} variant='danger'>Delete</Button>
         </Card>
       ))

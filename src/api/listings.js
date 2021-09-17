@@ -47,14 +47,14 @@ export const deleteListing = (id, user) => {
   })
 }
 
-// edit/update list
-export const updateList = (listData, id, user) => {
+// edit/update listing
+export const updateListing = (itemData, id, user) => {
   return axios({
     method: 'PATCH',
-    url: apiUrl + '/lists/' + id,
+    url: apiUrl + '/edit/' + id,
     headers: {
       Authorization: `Bearer ${user.token}`
     },
-    data: { list: listData }
+    data: { item: itemData }
   })
 }

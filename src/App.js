@@ -14,6 +14,7 @@ import CreateListing from './components/listings/CreateListing'
 import IndexListings from './components/listings/IndexListings'
 import ShowListing from './components/listings/ShowListing'
 import PostedListings from './components/listings/PostedListings'
+import UpdateListing from './components/listings/UpdateListing'
 
 class App extends Component {
   constructor (props) {
@@ -108,6 +109,19 @@ class App extends Component {
             path='/posted-listings'
             render={() => (
               <PostedListings
+                msgAlert={this.msgAlert}
+                clearUser={this.clearUser}
+                user={user}
+              />
+            )}
+          />
+
+          <AuthenticatedRoute
+            exact
+            user={user}
+            path='/edit/:id'
+            render={() => (
+              <UpdateListing
                 msgAlert={this.msgAlert}
                 clearUser={this.clearUser}
                 user={user}
