@@ -66,7 +66,7 @@ class CreateListing extends Component {
               onChange={this.handleChange}
             />
             <h5 style={{ float: 'left' }}>Description*</h5>
-            <Form.Control
+            <Form.Control as='textarea' rows={4}
               required
               name='description'
               value={item.description}

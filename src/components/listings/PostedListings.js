@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 // import { indexListings } from '../../api/listings'
 import Card from 'react-bootstrap/Card'
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { indexListings } from '../../api/listings'
+import { deleteListing, indexListings } from '../../api/listings'
 
 class PostedListings extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      items: null,
+      items: [],
       isLoaded: true
     }
   }
@@ -26,16 +26,40 @@ class PostedListings extends Component {
       .catch(console.error)
   }
 
+  // delete owned listing event handler
+  delete = (itemId) => {
+    const { user, match, history, msgAlert } = this.props
+    deleteListing(itemId, user)
+      .then(() => history.push('/'))
+      .then(() => history.push(match.url))
+      .then(() =>
+        msgAlert({
+          heading: 'Successfully Deleted Listing',
+          message: 'Your post no longer exists.',
+          variant: 'success'
+        })
+      )
+      .catch((err) =>
+        msgAlert({
+          heading: 'Failed to Delete Listing',
+          message: 'Something went wrong: ' + err.message,
+          variant: 'danger'
+        })
+      )
+      .catch(console.error)
+  }
+
   render () {
     let listedItems
     const { items } = this.state
     const { user } = this.props
-    // const { history } = this.props
+
+    // variable for items that user owns
+    const filteredItems = items.filter((item) => user._id === item.owner)
 
     if (!items) {
-      listedItems = 'Loading...Loadin...Loadi...Load...Loa...Lo...L'
-    } else {
-      const filteredItems = items.filter(item => user._id === item.owner)
+      listedItems = 'Loading...'
+    } else if (filteredItems.length >= 1) {
       listedItems = filteredItems.map((item) => (
         <Card
           key={item._id}
@@ -49,15 +73,16 @@ class PostedListings extends Component {
             src='https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
           />
           <Card.Body>
-            <Link to={'/listings/' + item._id}>
-              <Card.Title>{item.title}</Card.Title>
-            </Link>
-            <Card.Text>{item.description}</Card.Text>
-            <ListGroup className='list-group-flush'>{item.price}</ListGroup>
-            {/* <Button onClick={() => history.push(`/listings/${item._id}`)} variant='primary'>View Item</Button> */}
+            <Card.Title>{item.title}</Card.Title>
+            <Card.Text>{item.price}</Card.Text>
+            <ListGroup className='list-group-flush'>{item.category}</ListGroup>
           </Card.Body>
+          <Button>Edit</Button>
+          <Button onClick={() => this.delete(item._id)} variant='danger'>Delete</Button>
         </Card>
       ))
+    } else {
+      return <h3>No Posted Listings.</h3>
     }
     return (
 

@@ -6,6 +6,7 @@ import apiUrl from '../../apiConfig'
 import Card from 'react-bootstrap/Card'
 // import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Spinner from 'react-bootstrap/Spinner'
 
 class IndexListings extends Component {
   constructor (props) {
@@ -30,7 +31,7 @@ class IndexListings extends Component {
     const { items } = this.state
     // const { history } = this.props
     if (!items) {
-      listedItems = 'Loading...'
+      listedItems = <Spinner animation='border' />
     } else {
       listedItems = items.map((item) => (
         <Card

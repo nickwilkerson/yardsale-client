@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showListing } from '../../api/listings'
 // import Button from 'react-bootstrap/Button'
-// import Card from 'react-bootstrap/Card'
+import Figure from 'react-bootstrap/Figure'
 
 class ShowListing extends Component {
   constructor (props) {
@@ -61,7 +61,17 @@ class ShowListing extends Component {
 
     return (
       <>
-       Woah Kenny
+        <Figure>
+          <Figure.Image
+            width={800}
+            height={500}
+            alt='500x500'
+            src='https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
+          />
+          <Figure.Caption style={{ position: 'absolute', textAlign: 'right' }}>
+            {this.props.description}dafd
+          </Figure.Caption>
+        </Figure>
       </>
     )
   }
