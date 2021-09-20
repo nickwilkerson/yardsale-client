@@ -2,24 +2,26 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showListing } from '../../api/listings'
-// import Button from 'react-bootstrap/Button'
-import Figure from 'react-bootstrap/Figure'
+import Button from 'react-bootstrap/Button'
+// import Figure from 'react-bootstrap/Figure'
+// import ClickCounter from './ClickCounter'
+import Card from 'react-bootstrap/card'
 
 class ShowListing extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      item: null,
-      deleted: false
+      item: []
     }
   }
 
   componentDidMount () {
     const { match, msgAlert } = this.props
-    console.log('this.props ', match.params.id)
     // axios call for single listing
     showListing(match.params.id)
-      .then(res => this.setState({ item: res.data.listing }))
+      .then(res => {
+        this.setState({ item: res.data.item })
+      })
       .catch(err =>
         msgAlert({
           heading: 'Show listing failed',
@@ -29,49 +31,50 @@ class ShowListing extends Component {
       )
   }
 
-  // destroy = () => {
-  //   const { match, user, msgAlert, history } = this.props
-  //   // axios call to delete listing
-  //   deleteListing(match.params.id, user)
-  //   // Redirect to the list index
-  //     .then(() => history.push('/lists'))
-  //     .then(() =>
-  //       msgAlert({
-  //         heading: 'List Deleted Successfully',
-  //         message: 'Your list no longer exists',
-  //         variant: 'success'
-  //       })
-  //     )
-  //     .catch((err) =>
-  //       msgAlert({
-  //         heading: 'Failed to Delete List',
-  //         message: 'Something went wrong: ' + err.message,
-  //         variant: 'danger'
-  //       })
-  //     )
-  // }
-
   render () {
     if (this.state.item === null) {
       return 'Loading....'
     }
     // const { owner } = this.state.item
-    // const { user, history, match } = this.props
-    // const { item } = this.state
-
+    const { history } = this.props
+    const { item } = this.state
     return (
       <>
-        <Figure>
-          <Figure.Image
-            width={800}
-            height={500}
-            alt='500x500'
-            src='https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
+        <Card
+          style={{
+            margin: 'auto',
+            marginTop: '75px',
+            height: '28em',
+            width: '60em'
+          }}>
+          <Card.Header as='h5' style={{ textAlign: 'center' }}>
+            {item.title}
+          </Card.Header>
+          <Card.Img
+            style={{ width: '50%', height: '82%', position: 'absolute', marginTop: '2.5em' }}
+            src={item.image}
           />
-          <Figure.Caption style={{ position: 'absolute', textAlign: 'right' }}>
-            {this.props.description}dafd
-          </Figure.Caption>
-        </Figure>
+          <Card.Body
+            class='d-flex align-items-start justify-content-end'
+            style={{
+              marginRight: '30%', marginTop: '30px'
+            }}>
+            <Card.Text style={{ bottomBorder: '2px solid black' }}>
+              <h5>Description:</h5>
+              <p>{item.description}</p>
+              <h5>Price:</h5>
+              <p>{item.price}</p>
+            </Card.Text>
+          </Card.Body>
+          <Button
+            class='align-items-end'
+            style={{ position: 'absolute', bottom: 0, width: '100%' }}
+            variant='primary'
+            onClick={() => history.push('/listings')}>
+              Back to Listings
+          </Button>
+          {/* <ClickCounter /> */}
+        </Card>
       </>
     )
   }

@@ -55,7 +55,7 @@ class PostedListings extends Component {
     const { user, match } = this.props
 
     // variable for items that user owns
-    const filteredItems = items.filter((item) => user._id === item.owner)
+    const filteredItems = items.filter(item => user._id === item.owner)
 
     if (!items) {
       listedItems = 'Loading...'
@@ -66,7 +66,8 @@ class PostedListings extends Component {
           className='d-inline-flex p-2'
           style={{
             width: '18rem',
-            margin: '10px'
+            margin: '10px',
+            marginTop: '30px'
           }}>
           <Card.Img
             variant='top'
@@ -78,16 +79,16 @@ class PostedListings extends Component {
             <ListGroup className='list-group-flush'>{item.category}</ListGroup>
           </Card.Body>
           <Link to={{ pathname: `/edit/${match.params.id}`, itemId: item._id }}>
-            <Button>Edit</Button>
+            <Button style={{ width: '100%', marginBottom: '5px' }}>Edit</Button>
           </Link>
-          <Button onClick={() => this.delete(item._id)} variant='danger'>Delete</Button>
+          <Button onClick={() => this.delete(item._id)} variant='danger'
+            style={{ width: '100%' }}>Delete</Button>
         </Card>
       ))
     } else {
       return <h3>No Posted Listings.</h3>
     }
     return (
-
       <div>
         {listedItems}
       </div>

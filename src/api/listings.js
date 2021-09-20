@@ -26,7 +26,6 @@ export const indexListings = (user) => {
 
 // show one list
 export const showListing = (id, user) => {
-  console.log('id is: ', id)
   return axios({
     url: apiUrl + '/listings/' + id,
     method: 'get'

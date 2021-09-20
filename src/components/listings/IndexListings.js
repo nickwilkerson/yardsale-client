@@ -29,7 +29,6 @@ class IndexListings extends Component {
   render () {
     let listedItems
     const { items } = this.state
-    // const { history } = this.props
     if (!items) {
       listedItems = <Spinner animation='border' />
     } else {
@@ -38,25 +37,39 @@ class IndexListings extends Component {
           key={item._id}
           className='d-inline-flex p-2'
           style={{
-            width: '18rem',
-            margin: '10px'
+            width: '15rem',
+            height: '18rem',
+            margin: '10px',
+            marginTop: '30px'
           }}>
           <Card.Img
             variant='top'
-            src='https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
+            style={{ width: '100%', height: '48%' }}
+            src={item.image}
           />
           <Card.Body>
             <Link to={'/listings/' + item._id}>
-              <Card.Title>{item.title}</Card.Title>
+              <Card.Title style={{
+                textAlign: 'center',
+                borderBottom: '2px solid black',
+                paddingBottom: '15px',
+                margin: '0 auto'
+              }}>{item.title}</Card.Title>
             </Link>
-            <Card.Text>{item.description}</Card.Text>
-            <ListGroup className='list-group-flush'>{item.price}</ListGroup>
+            <ListGroup className='list-group-flush'>
+              <ListGroup.Item style={{ color: 'green' }}>{item.price}</ListGroup.Item>
+              <ListGroup.Item>{item.userEmail}</ListGroup.Item>
+            </ListGroup>
             {/* <Button onClick={() => history.push(`/listings/${item._id}`)} variant='primary'>View Item</Button> */}
           </Card.Body>
         </Card>
       ))
     }
-    return <div>{listedItems}</div>
+    return (
+      <>
+        <div>{listedItems}</div>
+      </>
+    )
   }
 }
 

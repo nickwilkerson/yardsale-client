@@ -5,6 +5,10 @@ import { withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { createListing } from '../../api/listings'
+// import AddImg from './AddImg'
+import Dropdown from 'react-bootstrap/dropdown'
+const skiImg = 'http://trekbaron.com/wp-content/uploads/2020/10/types-of-skis-Oct202020-1-min.jpg'
+const snowboardImg = 'https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
 
 class CreateListing extends Component {
   constructor (props) {
@@ -14,17 +18,39 @@ class CreateListing extends Component {
         title: '',
         description: '',
         price: '',
-        category: ''
+        category: 0,
+        userEmail: this.props.user.email,
+        image: ''
       },
-      dropdownMonth: 'Month'
+      dropdownCategory: 'Category'
     }
   }
 
-  // categories = ['Snowboards', 'Skis', 'Bindings', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  componentDidMount = () => {
+
+  }
 
   handleChange = (event) => {
     const copiedItem = Object.assign(this.state.item)
-    copiedItem[event.target.name] = event.target.value
+    const e = event.target.name
+
+    if (e === 'title' || e === 'description' || e === 'price') {
+      copiedItem[event.target.name] = event.target.value
+    } else {
+      copiedItem.category = event.target.name
+      this.setState({ dropdownCategory: this.categories[e] })
+    }
+
+    console.log('state', this.state)
+    console.log('image', copiedItem.image)
+
+    if (copiedItem.category === '0') {
+      copiedItem.image = skiImg
+    } else if (copiedItem.category === '1') {
+      copiedItem.image = snowboardImg
+    } else if (copiedItem.category === '2') {
+      copiedItem.image = snowboardImg
+    }
 
     this.setState({ item: copiedItem })
   }
@@ -49,9 +75,18 @@ class CreateListing extends Component {
       })
   }
 
+  categories = ['Skis', 'Snowboard', 'Bindings']
+
   render () {
     const { item } = this.state
-
+    const dropdownJSX = this.categories.map(category => (
+      <Dropdown.Item
+        key={category}
+        onClick={this.handleChange}
+        name={this.categories.indexOf(category)}>
+        {category}
+      </Dropdown.Item>
+    ))
     return (
       <div>
         <Form onSubmit={this.handleSubmit} className='text-center'>
@@ -66,14 +101,16 @@ class CreateListing extends Component {
               onChange={this.handleChange}
             />
             <h5 style={{ float: 'left' }}>Description*</h5>
-            <Form.Control as='textarea' rows={4}
+            <Form.Control
+              as='textarea'
+              rows={4}
               required
               name='description'
               value={item.description}
               placeholder='Description'
               onChange={this.handleChange}
             />
-            <h5 style={{ float: 'left' }}>Price</h5>
+            <h5 style={{ float: 'left' }}>Price*</h5>
             <Form.Control
               required
               name='price'
@@ -81,19 +118,27 @@ class CreateListing extends Component {
               placeholder='Price'
               onChange={this.handleChange}
             />
-            <h5 style={{ float: 'left' }}>Category*</h5>
-            <Form.Control
+
+            {/* <Form.Control
               required
               name='category'
               value={item.category}
               placeholder='Category'
               onChange={this.handleChange}
-            />
-            <Button type='submit' variant='outline-dark'>
-            Post
-            </Button>
+            /> */}
+            <h5 style={{ float: 'left' }}>Category*</h5>
+            <Dropdown style={{ position: 'absolute', marginTop: '30px' }}>
+              <Dropdown.Toggle id='dropdown-basic'>{this.state.dropdownCategory}</Dropdown.Toggle>
+              <Dropdown.Menu>{dropdownJSX}</Dropdown.Menu>
+            </Dropdown>
+            <Button type='submit' variant='outline-dark'>Post</Button>
           </Form.Group>
         </Form>
+        <div>
+          {/* <Button>
+            <AddImg />
+          </Button> */}
+        </div>
       </div>
     )
   }

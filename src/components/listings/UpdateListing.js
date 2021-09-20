@@ -19,7 +19,6 @@ class UpdateListing extends Component {
   componentDidMount () {
     // one of the automatic router props we get is the match object - that has data about the params in our front-end route url
     const { location, user } = this.props
-
     showListing(location.itemId, user)
       .then((res) => this.setState({ item: res.data.item }))
       .catch(console.error)
