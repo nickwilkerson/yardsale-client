@@ -71,6 +71,7 @@ class PostedListings extends Component {
           }}>
           <Card.Img
             variant='top'
+            style={{ width: '100%', height: '48%' }}
             src={item.image}
           />
           <Card.Body>
@@ -80,8 +81,12 @@ class PostedListings extends Component {
           <Link to={{ pathname: `/edit/${match.params.id}`, itemId: item._id }}>
             <Button style={{ width: '100%', marginBottom: '5px' }}>Edit</Button>
           </Link>
-          <Button onClick={() => this.delete(item._id)} variant='danger'
-            style={{ width: '100%' }}>Delete</Button>
+          <Button
+            onClick={() => this.delete(item._id)}
+            variant='danger'
+            style={{ width: '100%' }}>
+            Delete
+          </Button>
         </Card>
       ))
     } else {
