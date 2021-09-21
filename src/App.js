@@ -15,6 +15,7 @@ import IndexListings from './components/listings/IndexListings'
 import ShowListing from './components/listings/ShowListing'
 import PostedListings from './components/listings/PostedListings'
 import UpdateListing from './components/listings/UpdateListing'
+import Home from './components/Home/Home'
 
 class App extends Component {
   constructor (props) {
@@ -62,6 +63,13 @@ class App extends Component {
         ))}
         <main className='container'>
           <Route
+            path='/'
+            exact
+            render={() => (
+              <Home msgAlert={this.msgAlert} setUser={this.setUser}/>
+            )}
+          />
+          <Route
             path='/sign-up'
             render={() => (
               <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
@@ -70,7 +78,7 @@ class App extends Component {
           <Route
             path='/sign-in'
             render={() => (
-              <SignIn msgAlert={this.msgAlert} setUser={this.setUser}/>
+              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
             )}
           />
           <AuthenticatedRoute
@@ -134,7 +142,11 @@ class App extends Component {
             exact
             path='/listings'
             render={() => (
-              <IndexListings msgAlert={this.msgAlert} setUser={this.setUser} user={user}/>
+              <IndexListings
+                msgAlert={this.msgAlert}
+                setUser={this.setUser}
+                user={user}
+              />
             )}
           />
           <Route

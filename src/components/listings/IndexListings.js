@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 // import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
+// import ClickCounter from './ClickCounter'
 
 class IndexListings extends Component {
   constructor (props) {
@@ -57,7 +58,7 @@ class IndexListings extends Component {
               }}>{item.title}</Card.Title>
             </Link>
             <ListGroup className='list-group-flush'>
-              <ListGroup.Item style={{ color: 'green' }}>{item.price}</ListGroup.Item>
+              <ListGroup.Item style={{ color: 'green', fontFamily: 'sans-serif' }}>{item.price}</ListGroup.Item>
               <ListGroup.Item>{item.userEmail}</ListGroup.Item>
             </ListGroup>
             {/* <Button onClick={() => history.push(`/listings/${item._id}`)} variant='primary'>View Item</Button> */}

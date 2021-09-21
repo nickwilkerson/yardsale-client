@@ -26,7 +26,6 @@ class AddImg extends Component {
       fd
     )
       .then((res) => {
-        console.log('res', res)
       })
       .catch(console.error)
   }

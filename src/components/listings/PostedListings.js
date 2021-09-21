@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 // import { indexListings } from '../../api/listings'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import ListGroup from 'react-bootstrap/ListGroup'
+// import ListGroup from 'react-bootstrap/ListGroup'
 import { deleteListing, indexListings } from '../../api/listings'
 
 class PostedListings extends Component {
@@ -71,12 +71,11 @@ class PostedListings extends Component {
           }}>
           <Card.Img
             variant='top'
-            src='https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
+            src={item.image}
           />
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>
-            <Card.Text>{item.price}</Card.Text>
-            <ListGroup className='list-group-flush'>{item.category}</ListGroup>
+            <Card.Text style={{ color: 'green' }}>{item.price}</Card.Text>
           </Card.Body>
           <Link to={{ pathname: `/edit/${match.params.id}`, itemId: item._id }}>
             <Button style={{ width: '100%', marginBottom: '5px' }}>Edit</Button>
@@ -86,7 +85,7 @@ class PostedListings extends Component {
         </Card>
       ))
     } else {
-      return <h3>No Posted Listings.</h3>
+      return <h3 style={{ textAlign: 'center', marginTop: '2em' }}>No Posted Listings.</h3>
     }
     return (
       <div>

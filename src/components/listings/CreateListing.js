@@ -9,6 +9,8 @@ import { createListing } from '../../api/listings'
 import Dropdown from 'react-bootstrap/dropdown'
 const skiImg = 'http://trekbaron.com/wp-content/uploads/2020/10/types-of-skis-Oct202020-1-min.jpg'
 const snowboardImg = 'https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
+const bindingsImg = 'https://dsgmedia.blob.core.windows.net/pub/2016/11/SNOWBOARDBINDINGS.jpg'
+const apparelImg = 'https://cdn11.bigcommerce.com/s-hjyfm/images/stencil/original/carousel/305/smith_goggles_and_helmets__61032.jpg?c=2&imbypass=on'
 
 class CreateListing extends Component {
   constructor (props) {
@@ -20,7 +22,8 @@ class CreateListing extends Component {
         price: '',
         category: 0,
         userEmail: this.props.user.email,
-        image: ''
+        image: '',
+        numOfViews: 0
       },
       dropdownCategory: 'Category'
     }
@@ -41,15 +44,14 @@ class CreateListing extends Component {
       this.setState({ dropdownCategory: this.categories[e] })
     }
 
-    console.log('state', this.state)
-    console.log('image', copiedItem.image)
-
     if (copiedItem.category === '0') {
       copiedItem.image = skiImg
     } else if (copiedItem.category === '1') {
       copiedItem.image = snowboardImg
     } else if (copiedItem.category === '2') {
-      copiedItem.image = snowboardImg
+      copiedItem.image = bindingsImg
+    } else if (copiedItem.category === '3') {
+      copiedItem.image = apparelImg
     }
 
     this.setState({ item: copiedItem })
@@ -75,7 +77,7 @@ class CreateListing extends Component {
       })
   }
 
-  categories = ['Skis', 'Snowboard', 'Bindings']
+  categories = ['Skis', 'Snowboard', 'Boots/Bindings', 'Apparel']
 
   render () {
     const { item } = this.state

@@ -7,12 +7,16 @@ import Button from 'react-bootstrap/Button'
 // import axios from 'axios'
 // API request
 import { showListing, updateListing } from '../../api/listings'
+import Dropdown from 'react-bootstrap/dropdown'
+const skiImg = 'http://trekbaron.com/wp-content/uploads/2020/10/types-of-skis-Oct202020-1-min.jpg'
+const snowboardImg = 'https://c1.wallpaperflare.com/preview/928/415/609/snowboard-winter-winter-sports-sport.jpg'
 
 class UpdateListing extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      item: ''
+      item: '',
+      dropdownCategory: 'Category'
     }
   }
 
@@ -26,7 +30,23 @@ class UpdateListing extends Component {
 
   handleChange = (event) => {
     const copiedItem = Object.assign(this.state.item)
-    copiedItem[event.target.name] = event.target.value
+    const e = event.target.name
+
+    if (e === 'title' || e === 'description' || e === 'price') {
+      copiedItem[event.target.name] = event.target.value
+    } else {
+      copiedItem.category = event.target.name
+      this.setState({ dropdownCategory: this.categories[e] })
+    }
+
+    if (copiedItem.category === '0') {
+      copiedItem.image = skiImg
+    } else if (copiedItem.category === '1') {
+      copiedItem.image = snowboardImg
+    } else if (copiedItem.category === '2') {
+      copiedItem.image = snowboardImg
+    }
+
     this.setState({ item: copiedItem })
   }
 
@@ -53,14 +73,24 @@ class UpdateListing extends Component {
       })
   }
 
+  categories = ['Skis', 'Snowboard', 'Bindings']
+
   render () {
     const { item } = this.state
+    const dropdownJSX = this.categories.map((category) => (
+      <Dropdown.Item
+        key={category}
+        onClick={this.handleChange}
+        name={this.categories.indexOf(category)}>
+        {category}
+      </Dropdown.Item>
+    ))
     return (
       <div>
         <Form onSubmit={this.handleSubmit} className='text-center'>
           <h3>Listing Information</h3>
           <Form.Group controlId='listing-post'>
-            <h5 style={{ float: 'left' }}>Title*</h5>
+            <h5 style={{ float: 'left' }}>Title</h5>
             <Form.Control
               required
               name='title'
@@ -68,7 +98,7 @@ class UpdateListing extends Component {
               placeholder='Title'
               onChange={this.handleChange}
             />
-            <h5 style={{ float: 'left' }}>Description*</h5>
+            <h5 style={{ float: 'left' }}>Description</h5>
             <Form.Control
               as='textarea'
               rows={4}
@@ -86,16 +116,23 @@ class UpdateListing extends Component {
               placeholder='Price'
               onChange={this.handleChange}
             />
-            <h5 style={{ float: 'left' }}>Category*</h5>
+            {/* <h5 style={{ float: 'left' }}>Category*</h5>
             <Form.Control
               required
               name='category'
               value={item.category}
               placeholder='Category'
               onChange={this.handleChange}
-            />
+            /> */}
+            <h5 style={{ float: 'left' }}>Category</h5>
+            <Dropdown style={{ position: 'absolute', marginTop: '30px' }}>
+              <Dropdown.Toggle id='dropdown-basic'>
+                {this.state.dropdownCategory}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>{dropdownJSX}</Dropdown.Menu>
+            </Dropdown>
             <Button type='submit' variant='outline-dark'>
-            Update
+              Update
             </Button>
           </Form.Group>
         </Form>

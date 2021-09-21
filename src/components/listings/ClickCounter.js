@@ -25,9 +25,7 @@ class ClickCounter extends Component {
 
   render () {
     return (
-      <button className='block' onClick={this.handleClick}>
-        <div className='counter'>{this.state.count}</div>
-      </button>
+      <h1>{this.state.item.numOfViews}</h1>
     )
   }
 }

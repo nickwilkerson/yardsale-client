@@ -31,6 +31,9 @@ class ShowListing extends Component {
       )
   }
 
+  componentWillUnmount () {
+  }
+
   render () {
     if (this.state.item === null) {
       return 'Loading....'
@@ -63,7 +66,7 @@ class ShowListing extends Component {
               <h5>Description:</h5>
               <p>{item.description}</p>
               <h5>Price:</h5>
-              <p>{item.price}</p>
+              <p style={{ color: 'green', fontFamily: 'sans-serif' }}>{item.price}</p>
             </Card.Text>
           </Card.Body>
           <Button

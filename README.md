@@ -1,9 +1,11 @@
 # yardsale-client
-Yard Sale is a website that provides users a destination to buy/sell/trade used winter sports equipment by contacting one another via direct message.
+Yard Sale is a website that provides users a destination to buy/sell/trade used winter sports equipment.
 
 ## Link to yardsale-client deployed site
+https://nickwilkerson.github.io/yardsale-client/
 
 ## Link to yardsale-api site
+https://gentle-retreat-52942.herokuapp.com/
 
 ## Link to yardsale-api repository
 https://github.com/nickwilkerson/yardsale-api
@@ -30,8 +32,27 @@ As a user, I want to be able to view all listings from all users.
 https://imgur.com/29dXLRB
 
 ## Screenshot of Application
+https://imgur.com/5fnd50U
+
+# Planning
+Day 1:
+Plan for project
+Download api template
+Set up api template
+Download front-end template
+Set up front-end template
+
+Day2:
+Start back-end routes and test with postman
+Start front end
+
+Day3:
+Keep working on front-end and back-end
+
+Day 4:
+Continue working on front end.
 
 ## Set Up Instructions
 1. Fork and Clone this repository
-2. Check Out to a new branch
-3. 
+2. `npm install` dependencies 
+3. Check out to a new branch 
