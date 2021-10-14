@@ -29,10 +29,6 @@ class CreateListing extends Component {
     }
   }
 
-  componentDidMount = () => {
-
-  }
-
   handleChange = (event) => {
     const copiedItem = Object.assign(this.state.item)
     const e = event.target.name

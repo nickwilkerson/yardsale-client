@@ -1,15 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
 
-// #root {
-//   background-image: 'https://images.alphacoders.com/598/598154.jpg';
-// }
-
+#root {
+  background-color: #D3E0E2;
+}
+ html {
+   background-color: #D3E0E2;
+ }
 * {
   font-family: 'Actor', sans-serif;
 }
 
-// .container {
-//   background-image: url('https://www.sunset.com/wp-content/uploads/colorado-ski-resorts-telluride-pr-1219-900x500.jpg');
-//   position: absolute;
-// }
+.color-nav {
+  background-color: #F1684E;
+}

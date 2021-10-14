@@ -22,7 +22,7 @@ class AddImg extends Component {
     const fd = new FormData()
     fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
     axios.post(
-      'https://cloud.mongodb.com/v2/614687099a3429156d909ec8#clusters',
+      '',
       fd
     )
       .then((res) => {
