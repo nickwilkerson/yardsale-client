@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/yardsale-client/static/css/main.ee033cd0.chunk.css",
-    "main.js": "/yardsale-client/static/js/main.5c31130d.chunk.js",
-    "main.js.map": "/yardsale-client/static/js/main.5c31130d.chunk.js.map",
+    "main.css": "/yardsale-client/static/css/main.c5cbba88.chunk.css",
+    "main.js": "/yardsale-client/static/js/main.de0b374a.chunk.js",
+    "main.js.map": "/yardsale-client/static/js/main.de0b374a.chunk.js.map",
     "runtime-main.js": "/yardsale-client/static/js/runtime-main.7acc9c4f.js",
     "runtime-main.js.map": "/yardsale-client/static/js/runtime-main.7acc9c4f.js.map",
     "static/js/2.f16637d5.chunk.js": "/yardsale-client/static/js/2.f16637d5.chunk.js",
     "static/js/2.f16637d5.chunk.js.map": "/yardsale-client/static/js/2.f16637d5.chunk.js.map",
     "index.html": "/yardsale-client/index.html",
-    "static/css/main.ee033cd0.chunk.css.map": "/yardsale-client/static/css/main.ee033cd0.chunk.css.map",
+    "static/css/main.c5cbba88.chunk.css.map": "/yardsale-client/static/css/main.c5cbba88.chunk.css.map",
     "static/js/2.f16637d5.chunk.js.LICENSE.txt": "/yardsale-client/static/js/2.f16637d5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7acc9c4f.js",
     "static/js/2.f16637d5.chunk.js",
-    "static/css/main.ee033cd0.chunk.css",
-    "static/js/main.5c31130d.chunk.js"
+    "static/css/main.c5cbba88.chunk.css",
+    "static/js/main.de0b374a.chunk.js"
   ]
 }
